@@ -1,4 +1,5 @@
 package controller;
+import java.util.List;
 
 import model.Database;
 import model.Livro;
@@ -22,11 +23,17 @@ public class BibliotecaController {
   }
 
   public void listarLivros() {
-    System.out.println("Lista de Livros:");
-    for (Livro Livro : database.listarLivros()) {
-      System.out.println(Livro);
+    List<Livro> livros = database.listarLivros();
+    if (livros.isEmpty()) {
+      System.out.println("Nenhum livro cadastrado.");
+    } else {
+      System.out.println("Lista de Livros:");
+      for (Livro livro : livros) {
+        System.out.println("Título: " + livro.getTitulo() + ", Autor: " + livro.getAutor());
+      }
     }
   }
+
 
   public void emprestarLivro() {
     String titulo = view.lerTituloLivro();
